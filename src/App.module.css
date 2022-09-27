@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 30vh;
+    border-bottom: 1px solid black;
+    animation-duration: 1s;
+    animation-name: hed;
+    font-family: fantasy;
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.441);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+
+}
+
+header div {
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    height: 10vh;
+    width: 30%;
+    text-transform: uppercase;
+
+
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(https://cdn.mos.cms.futurecdn.net/9UmWCbyxpKaEGXjwFG7dXo-1200-80.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+@keyframes hed {
+    0% {
+        top: -100px
+    }
+
+    100% {
+
+        top: 0px
+    }
+}
