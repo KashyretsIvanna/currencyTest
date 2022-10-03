@@ -1,33 +1,28 @@
-import styles from "./App.module.css"
-import CurrencyBlock from './CurrencyBlock';
-import { useEffect, useState } from 'react';
+import CurrencyBlock from "./CurrencyBlock";
+import { useEffect } from "react";
+import useGetList from "./hooks/useGetList";
+import { useSelector, useDispatch } from "react-redux";
+import { setEUR, setUSD } from "./redux/slice";
 
 function App() {
-  const [EURRate, setEUR] = useState("")
-  const [USDRate, setUSD] = useState("")
+  const dispatch = useDispatch();
+  const euroRate = useSelector((value) => value.currency.EUR);
+  const usdRate = useSelector((value) => value.currency.USD);
+
+  const response = useGetList("UAH");
 
   useEffect(() => {
-    var requestURL = 'https://api.exchangerate.host/latest?base=UAH';
-
-    var request = new XMLHttpRequest();
-    request.open('GET', requestURL);
-    request.responseType = 'json';
-    request.send();
-    request.onload = function () {
-      var response = request.response;
-      console.log(response)
-      setEUR(1 / response.rates.EUR, 1)
-      setUSD(1 / response.rates.USD)
+    if (response.rates) {
+      dispatch(setEUR(response));
+      dispatch(setUSD(response));
     }
-
-  }, [])
-
+  }, [response,dispatch]);
 
   return (
     <div className="App">
       <header>
-        <div>Euro rate: {EURRate}</div>
-        <div>Dollar rate: {USDRate}</div>
+        <div>Euro rate: {euroRate}</div>
+        <div>Dollar rate: {usdRate}</div>
       </header>
       <main>
         <CurrencyBlock />
